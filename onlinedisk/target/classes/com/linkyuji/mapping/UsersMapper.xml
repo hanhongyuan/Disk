@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkyuji.IDao.UsersMapper">
+	<resultMap id="BaseResultMap" type="com.linkyuji.pojo.Users">
+		<id column="idusers" property="idusers" jdbcType="INTEGER" />
+		<result column="userid" property="userid" jdbcType="VARCHAR" />
+		<result column="userpsw" property="userpsw" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="usertype" property="usertype" jdbcType="INTEGER" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		idusers, userid, userpsw, username, usertype, remark
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from users
+		where idusers = #{idusers,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from users
+		where idusers = #{idusers,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.linkyuji.pojo.Users">
+		insert into users (idusers, userid, userpsw,
+		username, usertype, remark
+		)
+		values (#{idusers,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR},
+		#{userpsw,jdbcType=VARCHAR},
+		#{username,jdbcType=VARCHAR}, #{usertype,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.linkyuji.pojo.Users">
+		insert into users
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="idusers != null">
+				idusers,
+			</if>
+			<if test="userid != null">
+				userid,
+			</if>
+			<if test="userpsw != null">
+				userpsw,
+			</if>
+			<if test="username != null">
+				username,
+			</if>
+			<if test="usertype != null">
+				usertype,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="idusers != null">
+				#{idusers,jdbcType=INTEGER},
+			</if>
+			<if test="userid != null">
+				#{userid,jdbcType=VARCHAR},
+			</if>
+			<if test="userpsw != null">
+				#{userpsw,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="usertype != null">
+				#{usertype,jdbcType=INTEGER},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.linkyuji.pojo.Users">
+		update users
+		<set>
+			<if test="userid != null">
+				userid = #{userid,jdbcType=VARCHAR},
+			</if>
+			<if test="userpsw != null">
+				userpsw = #{userpsw,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="usertype != null">
+				usertype = #{usertype,jdbcType=INTEGER},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where idusers = #{idusers,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.linkyuji.pojo.Users">
+		update users
+		set userid = #{userid,jdbcType=VARCHAR},
+		userpsw = #{userpsw,jdbcType=VARCHAR},
+		username = #{username,jdbcType=VARCHAR},
+		usertype = #{usertype,jdbcType=INTEGER},
+		remark = #{remark,jdbcType=VARCHAR}
+		where idusers = #{idusers,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectLogin" parameterType="java.lang.String"
+		resultType="com.linkyuji.pojo.Users">
+		select * from users
+		where userid=#{userid,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectId" parameterType="java.lang.String"
+		resultType="com.linkyuji.pojo.Users">
+		select * from users
+		where userid=#{userid,jdbcType=VARCHAR}
+	</select>
+	<insert id="regiest" parameterType="com.linkyuji.pojo.Users">
+		insert into users (userid, userpsw,
+		username, usertype, remark
+		)
+		values (#{userid,jdbcType=VARCHAR}, #{userpsw,jdbcType=VARCHAR},
+		#{username,jdbcType=VARCHAR},2, now()
+		)
+
+	</insert>
+
+	<select id="loadAllUsers" resultType="com.linkyuji.pojo.Users">
+		select * from `users` where
+		usertype = 2;
+	</select>
+
+</mapper>

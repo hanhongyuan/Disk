@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.linkyuji.IDao.BloginfoMapper" >
+  <insert id="saveBlog" parameterType="com.linkyuji.pojo.Bloginfo" >
+    insert into bloginfo (blogname, createdate,modifydate, userid, blogrtf
+      )
+    values (#{blogname,jdbcType=VARCHAR}, now(), now(),
+    #{userid,jdbcType=VARCHAR}, #{blogrtf,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+
+	<select id="loadAllBlogByID" parameterType="java.lang.String" resultType="com.linkyuji.pojo.Bloginfo">
+		select *
+		from sharefile.bloginfo
+		where userid  = #{userid,jdbcType=VARCHAR}
+	</select>
+	
+	<update id="updateBlog" parameterType="com.linkyuji.pojo.Bloginfo">
+			UPDATE `sharefile`.`bloginfo` 
+			SET `blogname`= #{blogname,jdbcType=VARCHAR}, `blogrtf`=#{blogrtf,jdbcType=LONGVARCHAR}, `modifydate`=now()
+			WHERE `idbloginfo`=#{idbloginfo,jdbcType=INTEGER};
+
+
+		
+	</update>
+	<delete id="deleteBlog" parameterType="java.lang.Integer">
+		DELETE FROM `sharefile`.`bloginfo` WHERE `idbloginfo`=#{idbloginfo,jdbcType=INTEGER};
+	</delete>
+</mapper>
