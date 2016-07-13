@@ -3,7 +3,7 @@
 <mapper namespace="com.linkyuji.IDao.FileMapper" >
 	<insert id="upload" parameterType="com.linkyuji.pojo.File">
 		INSERT INTO `sharefile`.`file`(`filename`,`folderid`,`url`,`userid`)
-		value(#{filename,jdbcType=VARCHAR},#{folderid,jdbcType=INTEGER},#{url,jdbcType=VARCHAR},#{userid,jdbcType=VARCHAR});		
+		value(#{filename,jdbcType=LONGVARCHAR},#{folderid,jdbcType=INTEGER},#{url,jdbcType=LONGVARCHAR},#{userid,jdbcType=VARCHAR});		
 	</insert>
 	<select id="loadFileByIdP" parameterType="java.util.Map" resultType="com.linkyuji.pojo.File">
 		select *
