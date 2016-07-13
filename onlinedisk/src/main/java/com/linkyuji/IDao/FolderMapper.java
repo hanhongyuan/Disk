@@ -10,5 +10,6 @@ public interface FolderMapper {
 	List<Folder> loadFolderByIdP(Map map);
 	Folder findFolder(Map map);
 	void deleteFolder(int folderid);
+	Folder getFolderById(int id);
 
 }

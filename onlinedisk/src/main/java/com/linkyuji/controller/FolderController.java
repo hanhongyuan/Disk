@@ -10,8 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.linkyuji.pojo.File;
 import com.linkyuji.pojo.Folder;
 import com.linkyuji.pojo.Users;
+import com.linkyuji.service.FileService;
 import com.linkyuji.service.FolderService;
 import com.linkyuji.service.UserService;
 
@@ -24,16 +26,29 @@ public class FolderController {
 	@Resource(name = "folderServiceImpl")
 	private FolderService folderService;
 	
+	@Resource(name = "fileServiceImpl")
+	private FileService fileService;
+	
 	private int trytemp = 0;
 	
 	@RequestMapping(value = "/loadResource.do", method = RequestMethod.GET)
 	public String loadResource(HttpServletRequest request, Model model){
-		System.out.println("loadResource.do");
+		System.out.println("loadResource.do");		
 		int parent = Integer.parseInt(request.getParameter("parent").toString());
 		Users user = (Users)request.getSession().getAttribute("user");
 		List<Folder> folderlist = folderService.loadFolderByIdP(user.getUserid(), parent);
+		List<File> filelist = fileService.loadFileByIdP(user.getUserid(), parent+"");
 		request.getSession().setAttribute("parent", parent);
 		request.getSession().setAttribute("folderlist", folderlist);
+		request.getSession().setAttribute("filelist", filelist);
+		
+		Folder foldersql = folderService.getFolderById(parent);
+		
+		if(foldersql!=null){
+			request.getSession().setAttribute("upper", foldersql.getFolderparent());
+		}else{
+			request.getSession().setAttribute("upper",-1);
+		}
 		return "redirect:/jsp/user/resource.jsp";
 	}
 	@RequestMapping(value = "/deleteFolder.do", method = RequestMethod.GET)
@@ -43,7 +58,7 @@ public class FolderController {
 		System.out.println("ÎÄ¼þ¼ÐÐòºÅ"+id);
 		folderService.deleteFolder(id);
 		Users user = (Users)request.getSession().getAttribute("user");
-		List<Folder> folderlist = folderService.loadFolderByIdP(user.getUserid(), 0);
+		List<Folder> folderlist = folderService.loadFolderByIdP(user.getUserid(),Integer.parseInt(request.getSession().getAttribute("parent").toString()));
 		request.getSession().setAttribute("folderlist", folderlist);
 		
 		return "redirect:/jsp/user/resource.jsp";

@@ -10,6 +10,6 @@ public interface FolderService {
 	public boolean deleteFolder(int folderid);
 	public List<Folder> loadFolderByIdP(String userid,int parent);
 	public boolean checkFolder(String foldername,String userid,int parent);
-	
+	public Folder getFolderById(int id);
 
 }

@@ -72,10 +72,12 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li><a onclick="openNew()">新建文件夹</a></li>
 						<li><a href="#">上传文件
-									<input title="点击选择文件" id="upfile" multiple="" accept="*/*" 
-										type="file" name="upload" onchange="changefile()"
+								<form id="uploadfile" action="upload.do"
+									enctype="multipart/form-data" method="post">
+									<input title="点击选择文件" id="upfile" multiple="multiple"
+										accept="*/*" type="file" name="upload" onchange="changefile()"
 										style="position: absolute; opacity: 0; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer;"></input>
-								
+								</form>
 						</a></li>
 					</ul>
 				</div>
@@ -88,6 +90,15 @@
 							</tr>
 						</thead>
 						<tbody>
+							<%
+								int up = Integer.parseInt(session.getAttribute("upper").toString());
+								if (up != -1) {
+									
+							%>
+									<tr><td><a href="loadResource.do?parent=${upper}">上一级</a></td><td></td></tr>
+							<%
+								}
+							%>
 							<tr id="newfolder" style="display: none;">
 								<form action="addFolder.do" method="post">
 									<td><input id="newf" name="thenewfolder" type="text"
@@ -107,10 +118,12 @@
 								</tr>
 							</c:forEach>
 
-							<c:forEach items="${bloglist}" var="bloginfo">
+							<c:forEach items="${filelist}" var="fileinfo">
 								<tr>
-									<td>${bloginfo.blogname}</td>
-									<td><a>下载</a>&nbsp&nbsp&nbsp<a>删除</a></td>
+									<td>${fileinfo.filename}</td>
+									<td><a href="download.do?fileid=${fileinfo.idfile}">下载</a>&nbsp&nbsp&nbsp
+
+										<a href="deletefile.do?fileid=${fileinfo.idfile}">删除</a></td>
 									<!-- 自定义标签 -->
 								</tr>
 							</c:forEach>
@@ -130,13 +143,13 @@
 		function openNew() {
 			document.getElementById("newfolder").style.display = "inline";
 		}
-		
-		function changefile(){
-			var a = document.getElementById("upfile").value;
-			alert(a);
-		}
 
-	
+		function changefile() {
+			var a = document.getElementById("upfile").value;
+			var as = document.getElementById("uploadfile");
+			as.submit();
+
+		}
 	</script>
 	<!-- Bootstrap core JavaScript
     ================================================== -->

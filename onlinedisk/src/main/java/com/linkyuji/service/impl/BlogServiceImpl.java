@@ -34,7 +34,7 @@ public class BlogServiceImpl implements BlogService{
 		blogDao.updateBlog(blog);
 		return true;
 	}
-
+	@Transactional
 	public boolean deleteBlog(int blogid) {
 		blogDao.deleteBlog(blogid);
 		return true;

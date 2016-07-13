@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.linkyuji.IDao.FolderMapper;
 import com.linkyuji.pojo.Folder;
@@ -16,7 +17,7 @@ import com.linkyuji.service.FolderService;
 public class FolderServiceImpl implements FolderService {
 	@Autowired
 	private FolderMapper folderDao;
-
+	@Transactional
 	public boolean addFolder(Folder folder) {
 		// TODO Auto-generated method stub
 		folderDao.addFolder(folder);
@@ -27,13 +28,15 @@ public class FolderServiceImpl implements FolderService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	@Transactional
 	public boolean deleteFolder(int folderid) {
 		// TODO Auto-generated method stub
+		
 		folderDao.deleteFolder(folderid);
 		return true;
 	}
-
+	
+	@Transactional
 	public List<Folder> loadFolderByIdP(String userid, int parent) {
 		// TODO Auto-generated method stub
 		Map map = new HashMap();
@@ -44,7 +47,7 @@ public class FolderServiceImpl implements FolderService {
 		System.out.println(list.get(i).getFoldername());
 		return list;
 	}
-
+	@Transactional
 	public boolean checkFolder(String foldername, String userid, int parent) {
 		// TODO Auto-generated method stub
 		Map map = new HashMap();
@@ -57,6 +60,12 @@ public class FolderServiceImpl implements FolderService {
 			return false;
 		else
 		return true;
+	}
+
+	public Folder getFolderById(int id) {
+		// TODO Auto-generated method stub
+		
+		return folderDao.getFolderById(id);
 	}
 
 }

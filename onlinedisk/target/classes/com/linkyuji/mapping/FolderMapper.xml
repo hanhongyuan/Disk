@@ -18,4 +18,9 @@
   <delete id="deleteFolder" parameterType="java.lang.Integer">
   	DELETE FROM `sharefile`.`folder` WHERE `idfolder`=#{folderid,jdbcType=INTEGER};  	
   </delete>
+  <select id="getFolderById" parameterType="java.lang.Integer" resultType="com.linkyuji.pojo.Folder">
+  	select *
+  	from `sharefile`.`folder`
+  	where `idfolder`=#{id,jdbcType=INTEGER};
+  </select>
 </mapper>
