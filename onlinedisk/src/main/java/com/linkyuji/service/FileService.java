@@ -9,5 +9,6 @@ public interface FileService {
 	public List<File> loadFileByIdP(String id,String parent);
 	public void deleteFile(int id);
 	public File getFileById(int id);
+	public List<File> loadAllFile();
 
 }

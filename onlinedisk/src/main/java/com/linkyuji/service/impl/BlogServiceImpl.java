@@ -39,6 +39,11 @@ public class BlogServiceImpl implements BlogService{
 		blogDao.deleteBlog(blogid);
 		return true;
 	}
+
+	public List<Bloginfo> loadAllBlog() {
+		// TODO Auto-generated method stub
+		return blogDao.loadAllBlog();
+	}
 	
 
 }

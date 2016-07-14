@@ -15,4 +15,6 @@ public interface FileMapper {
 
 	File getFileById(int id);
 
+	List<File> loadAllFile();
+
 }

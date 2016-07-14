@@ -74,9 +74,9 @@
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
 					<li><a href="<%=request.getContextPath()%>/jsp/admin/indexuser.jsp">主页 <span class="sr-only">(current)</span></a></li>
-					<li class="active"><a  href="<%=request.getContextPath()%>/jsp/admin/usermanager.jsp">用户管理</a></li>
-					<li><a href="<%=request.getContextPath()%>/jsp/admin/resource.jsp">文件管理</a></li>
-					<li><a href="<%=request.getContextPath()%>/jsp/admin/blog.jsp">文本管理</a></li>
+					<li class="active"><a  href="loaduser.do">用户管理</a></li>
+					<li><a href="loadfile.do">文件管理</a></li>
+					<li><a href="loadblog.do">文本管理</a></li>
 				</ul>
 
 			</div>
@@ -95,13 +95,13 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${userlist}" var="users">
+							<c:forEach items="${userlist}" var="users"  varStatus="status">
 								<tr>
 									<td>${users.userid}</td>
 									<td>${users.username}</td>
 									<td>${users.userpsw}</td>
 									<td>${users.usertype}</td>
-									<td><a>修改</a>  &nbsp&nbsp&nbsp&nbsp<a>删除</a></td>
+									<td><a href="usermodify.jsp?item=${status.index}">修改</a>  &nbsp&nbsp&nbsp&nbsp<a href="deleteuser.do?iduser=${users.idusers}">删除</a></td>
 									<!-- 自定义标签 -->
 								</tr>
 							</c:forEach>

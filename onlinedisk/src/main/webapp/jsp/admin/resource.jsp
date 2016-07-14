@@ -77,17 +77,39 @@
 						href="<%=request.getContextPath()%>/jsp/admin/indexuser.jsp">主页
 							<span class="sr-only">(current)</span>
 					</a></li>
-					<li><a
-						href="<%=request.getContextPath()%>/jsp/admin/usermanager.jsp">用户管理</a></li>
-					<li class="active"><a
-						href="<%=request.getContextPath()%>/jsp/admin/resource.jsp">文件管理</a></li>
-					<li><a href="<%=request.getContextPath()%>/jsp/admin/blog.jsp">文本管理</a></li>
+					<li><a  href="loaduser.do">用户管理</a></li>
+					<li class="active"><a href="loadfile.do">文件管理</a></li>
+					<li><a href="loadblog.do">文本管理</a></li>
 				</ul>
 
 			</div>
 			<div id="managerurl"
 				class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<h2 class="sub-header">文件管理</h2>
+				
+								<div class="table-responsive">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>文件id</th>
+								<th>文件名</th>
+								<th>所属用户id</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${allfile}" var="file">
+								<tr>
+									<td>${file.idfile}</td>
+									<td>${file.filename}</td>
+									<td>${file.userid}</td>
+									<td><a  href="downloadfile.do?idfile=${file.idfile}">下载</a>&nbsp&nbsp&nbsp&nbsp<a href="deletefile.do?idfile=${file.idfile}">删除</a></td>
+									<!-- 自定义标签 -->
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 
 			</div>
 		</div>

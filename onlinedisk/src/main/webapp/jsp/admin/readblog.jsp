@@ -41,12 +41,14 @@
 <body>
 	<%
 		Users a = (Users) session.getAttribute("user");
-	if (a == null||a.getUsertype()!=1){
-		%>
-		<meta http-equiv="refresh" content="0;url=<%=request.getContextPath()%>/login.jsp">
-		
-		<%return;
-}
+		if (a == null || a.getUsertype() != 1) {
+	%>
+	<meta http-equiv="refresh"
+		content="0;url=<%=request.getContextPath()%>/login.jsp">
+
+	<%
+		return;
+		}
 	%>
 
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -68,22 +70,43 @@
 		</div>
 	</div>
 	</nav>
+	<%
+		request.setCharacterEncoding("UTF-8");
+		List<Bloginfo> list = (List<Bloginfo>) session.getAttribute("allblog");
 
+		String temp = (String) request.getParameter("item");
+
+		Bloginfo blog = (Bloginfo) list.get(Integer.parseInt(temp));
+		session.setAttribute("uodateblog", blog);
+	%>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li class="active"><a href="<%=request.getContextPath()%>/jsp/admin/indexuser.jsp">主页 <span class="sr-only">(current)</span></a></li>
-					<li><a  href="loaduser.do">用户管理</a></li>
+					<li><a
+						href="<%=request.getContextPath()%>/jsp/admin/indexuser.jsp">主页
+							<span class="sr-only">(current)</span>
+					</a></li>
+					<li><a href="loaduser.do">用户管理</a></li>
 					<li><a href="loadfile.do">文件管理</a></li>
-					<li><a href="loadblog.do">文本管理</a></li>
+					<li class="active"><a href="loadblog.do">文本管理</a></li>
 				</ul>
 
 			</div>
 			<div id="managerurl"
 				class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<h2 class="sub-header">主页</h2>
-										${user.username}欢迎回来
+				<h2 class="sub-header">文本管理</h2>
+								<div class="input-group input-group-lg">
+					<span class="input-group-addon">标题</span> <input type="text"
+						name="name" class="form-control" placeholder="Twitterhandle"
+						value="<%=blog.getBlogname()%>" readonly="readonly">
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<%=blog.getBlogrtf()%>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

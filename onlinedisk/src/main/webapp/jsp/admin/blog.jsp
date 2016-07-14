@@ -79,18 +79,39 @@
 						href="<%=request.getContextPath()%>/jsp/admin/indexuser.jsp">主页
 							<span class="sr-only">(current)</span>
 					</a></li>
-					<li><a
-						href="<%=request.getContextPath()%>/jsp/admin/usermanager.jsp">用户管理</a></li>
-					<li><a
-						href="<%=request.getContextPath()%>/jsp/admin/resource.jsp">文件管理</a></li>
-					<li class="active"><a
-						href="<%=request.getContextPath()%>/jsp/admin/blog.jsp">文本管理</a></li>
+					<li><a href="loaduser.do">用户管理</a></li>
+					<li><a href="loadfile.do">文件管理</a></li>
+					<li class="active"><a href="loadblog.do">文本管理</a></li>
 				</ul>
 
 			</div>
 			<div id="managerurl"
 				class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<h2 class="sub-header">文本管理</h2>
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th style="width: 5%">博客ID</th>
+								<th style="width: 65%">标题</th>
+								<th style="width: 20%">修改时间</th>
+								<th style="width: 10%">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${allblog}" var="bloginfo" varStatus="status">
+								<tr>
+									<td>${bloginfo.idbloginfo}</td>
+									<td><a href="readblog.jsp?item=${status.index}">${bloginfo.blogname}</a></td>
+									<td>${bloginfo.modifydate}</td>
+									<td><a
+										href="deleteblog.do?idbloginfo=${bloginfo.idbloginfo}">删除</a></td>
+									<!-- 自定义标签 -->
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

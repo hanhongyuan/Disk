@@ -24,12 +24,15 @@
 		where idusers = #{idusers,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.linkyuji.pojo.Users">
-		insert into users (idusers, userid, userpsw,
+		insert into users (idusers,
+		userid, userpsw,
 		username, usertype, remark
 		)
-		values (#{idusers,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR},
+		values
+		(#{idusers,jdbcType=INTEGER}, #{userid,jdbcType=VARCHAR},
 		#{userpsw,jdbcType=VARCHAR},
-		#{username,jdbcType=VARCHAR}, #{usertype,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
+		#{username,jdbcType=VARCHAR},
+		#{usertype,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
 		)
 	</insert>
 	<insert id="insertSelective" parameterType="com.linkyuji.pojo.Users">
@@ -98,11 +101,14 @@
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.linkyuji.pojo.Users">
 		update users
-		set userid = #{userid,jdbcType=VARCHAR},
-		userpsw = #{userpsw,jdbcType=VARCHAR},
+		set
+		userid = #{userid,jdbcType=VARCHAR},
+		userpsw =
+		#{userpsw,jdbcType=VARCHAR},
 		username = #{username,jdbcType=VARCHAR},
 		usertype = #{usertype,jdbcType=INTEGER},
-		remark = #{remark,jdbcType=VARCHAR}
+		remark =
+		#{remark,jdbcType=VARCHAR}
 		where idusers = #{idusers,jdbcType=INTEGER}
 	</update>
 
@@ -118,10 +124,12 @@
 		where userid=#{userid,jdbcType=VARCHAR}
 	</select>
 	<insert id="regiest" parameterType="com.linkyuji.pojo.Users">
-		insert into users (userid, userpsw,
+		insert into users (userid,
+		userpsw,
 		username, usertype, remark
 		)
-		values (#{userid,jdbcType=VARCHAR}, #{userpsw,jdbcType=VARCHAR},
+		values (#{userid,jdbcType=VARCHAR},
+		#{userpsw,jdbcType=VARCHAR},
 		#{username,jdbcType=VARCHAR},2, now()
 		)
 
@@ -132,4 +140,10 @@
 		usertype = 2;
 	</select>
 
+	<update id="modifyUser" parameterType="com.linkyuji.pojo.Users">
+		UPDATE `sharefile`.`users`
+		SET `userpsw`=#{userpsw,jdbcType=VARCHAR},
+		`username`=#{username,jdbcType=VARCHAR}
+		 WHERE `userid`=#{userid,jdbcType=VARCHAR};
+	</update>
 </mapper>

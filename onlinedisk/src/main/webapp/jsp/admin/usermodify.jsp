@@ -36,17 +36,19 @@
 </style>
 
 </head>
-<%-- <script src="<%=request.getContextPath()%>/jquery/jquery-1.8.0.min.js"></script>
-<script src="<%=request.getContextPath()%>/js/manager.js"></script> --%>
+<script src="<%=request.getContextPath()%>/jquery/jquery-1.8.0.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/manager.js"></script>
 <body>
 	<%
 		Users a = (Users) session.getAttribute("user");
-	if (a == null||a.getUsertype()!=1){
-		%>
-		<meta http-equiv="refresh" content="0;url=<%=request.getContextPath()%>/login.jsp">
-		
-		<%return;
-}
+		if (a == null || a.getUsertype() != 1) {
+	%>
+	<meta http-equiv="refresh"
+		content="0;url=<%=request.getContextPath()%>/login.jsp">
+
+	<%
+		return;
+		}
 	%>
 
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -73,17 +75,61 @@
 		<div class="row">
 			<div class="col-sm-3 col-md-2 sidebar">
 				<ul class="nav nav-sidebar">
-					<li class="active"><a href="<%=request.getContextPath()%>/jsp/admin/indexuser.jsp">主页 <span class="sr-only">(current)</span></a></li>
-					<li><a  href="loaduser.do">用户管理</a></li>
+					<li><a
+						href="<%=request.getContextPath()%>/jsp/admin/indexuser.jsp">主页
+							<span class="sr-only">(current)</span>
+					</a></li>
+					<li class="active"><a href="loaduser.do">用户管理</a></li>
 					<li><a href="loadfile.do">文件管理</a></li>
 					<li><a href="loadblog.do">文本管理</a></li>
 				</ul>
 
 			</div>
+
+
+			<%
+				request.setCharacterEncoding("UTF-8");
+				List<Users> list = (List<Users>) session.getAttribute("userlist");
+
+				String temp = (String) request.getParameter("item");
+
+				Users user = (Users) list.get(Integer.parseInt(temp));
+			%>
 			<div id="managerurl"
 				class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<h2 class="sub-header">主页</h2>
-										${user.username}欢迎回来
+				<h2 class="sub-header">用户管理</h2>
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>用户ID</th>
+								<th>用户名</th>
+								<th>密码</th>
+								<th>类型</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+
+						<tbody>
+
+							<tr>
+								<form action="modifyuser.do" method="post">
+								<td><input
+									style='border-left: 0px; border-top: 0px; border-right: 0px; border-bottom: 1px'
+									type="text" name="userid" value="<%=user.getUserid()%>"
+									readonly="readonly"></td>
+								<td><input type="text" name="username"
+									value="<%=user.getUsername()%>"></td>
+								<td><input type="text" name="password"
+									value="<%=user.getUserpsw()%>"></td>
+								<td><%=user.getUsertype()%></td>
+								<td><input type="submit" value="提交"></td>
+								<!-- 自定义标签 -->
+								</form>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

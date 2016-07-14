@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -91,12 +92,13 @@ public class FileController {
 	}
 
 	@RequestMapping(value = "/download.do", method = RequestMethod.GET)
-	public void downloadFile(HttpServletResponse response,HttpServletRequest request, Model model) {
+	public void downloadFile(HttpServletResponse response,HttpServletRequest request, Model model)throws UnsupportedEncodingException {
 		response.setCharacterEncoding("utf-8");  
         response.setContentType("multipart/form-data");  
         int id = Integer.parseInt(request.getParameter("fileid"));
         com.linkyuji.pojo.File sqlfile = fileService.getFileById(id);
-        response.setHeader("Content-Disposition", "attachment;fileName="+sqlfile.getFilename()); 
+       	String filename = new String(sqlfile.getFilename().getBytes(), "ISO8859-1");
+        response.setHeader("Content-Disposition", "attachment;fileName="+filename); 
         try {  
             File file=new File(sqlfile.getUrl());  
             System.out.println(file.getAbsolutePath());  
@@ -112,9 +114,7 @@ public class FileController {
             e.printStackTrace();  
         } catch (IOException e) {  
             e.printStackTrace();  
-        }  
-        
-		
+        } 
 	}
 
 }

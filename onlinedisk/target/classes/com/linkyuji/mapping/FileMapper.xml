@@ -20,4 +20,8 @@
 		from `sharefile`.`file`
 		where `idfile` = #{id,jdbcType=INTEGER}
 	</select>
+	<select id="loadAllFile" resultType="com.linkyuji.pojo.File">
+		select *
+		from `sharefile`.`file`;
+	</select>
 </mapper>

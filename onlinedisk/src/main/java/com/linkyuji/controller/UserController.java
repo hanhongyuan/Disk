@@ -99,6 +99,8 @@ public class UserController {
 			System.out.println("×¢²áÊ§°Ü");
 		return "redirect:/login.jsp";
 	}
+	
+
 
 	@ResponseBody
 	@RequestMapping(value = "/couldregiset.do", method = RequestMethod.POST)

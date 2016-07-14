@@ -45,4 +45,9 @@ public class FileServiceImpl implements FileService {
 		return fileDao.getFileById(id);
 	}
 
+	public List<File> loadAllFile() {
+		// TODO Auto-generated method stub
+		return fileDao.loadAllFile();
+	}
+
 }

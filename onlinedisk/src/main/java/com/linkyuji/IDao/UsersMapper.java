@@ -25,4 +25,6 @@ public interface UsersMapper {
     boolean regiest(Users users);
     
     List<Users> loadAllUsers();
+
+	void modifyUser(Users user);
 }

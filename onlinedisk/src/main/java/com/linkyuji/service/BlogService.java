@@ -9,4 +9,5 @@ public interface BlogService {
 	public List<Bloginfo> loadAllBlogByID(String userid);
 	public boolean modifyBlog(Bloginfo blog);
 	public boolean deleteBlog(int blogid);
+	public List<Bloginfo> loadAllBlog();
 }

@@ -9,4 +9,6 @@ public interface UserService {
 	public Users getUserById(String id);
 	public boolean regiest(Users users);
 	public List<Users> loadAllUsers();
+	public void deleteUserById(int id);
+	public void modifyUser(Users user);
 }

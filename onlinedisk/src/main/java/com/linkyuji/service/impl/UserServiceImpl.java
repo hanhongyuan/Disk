@@ -74,4 +74,16 @@ public class UserServiceImpl implements UserService{
 		
 	}
 
+	public void deleteUserById(int id) {
+		// TODO Auto-generated method stub
+		userDao.deleteByPrimaryKey(id);
+		
+	}
+
+	public void modifyUser(Users user) {
+		// TODO Auto-generated method stub
+		userDao.modifyUser(user);
+		
+	}
+
 }
