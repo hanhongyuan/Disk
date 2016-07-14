@@ -40,5 +40,9 @@
 		from
 		sharefile.bloginfo;
 	</select>
-
+	<delete id="deleteBlogByUserid" parameterType="java.lang.String">
+		delete from
+		`sharefile`.`bloginfo`
+		where `userid` = #{id,jdbcType=VARCHAR};
+	</delete>
 </mapper>

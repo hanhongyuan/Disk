@@ -24,4 +24,8 @@
 		select *
 		from `sharefile`.`file`;
 	</select>
+	<delete id="deleteFileByUserid" parameterType="java.lang.String">
+		delete from `sharefile`.`file`
+		where `userid` = #{id,jdbcType=VARCHAR};
+	</delete>
 </mapper>

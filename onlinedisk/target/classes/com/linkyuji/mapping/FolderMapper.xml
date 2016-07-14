@@ -1,26 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.linkyuji.IDao.FolderMapper" >
-  <insert id="addFolder" parameterType="com.linkyuji.pojo.Folder">
-  INSERT INTO `sharefile`.`folder` (`userid`, `foldername`, `folderparent`) VALUES (#{userid}, #{foldername}, #{folderparent});  
-  </insert>
-  
-  <select id="loadFolderByIdP" parameterType="java.util.Map" resultType="com.linkyuji.pojo.Folder">
-  	select *
-  	from folder
-  	where userid = #{userid,jdbcType=VARCHAR} and folderparent = #{folderparent,jdbcType = INTEGER};
-  </select>
-  <select id="findFolder" parameterType="java.util.Map" resultType="com.linkyuji.pojo.Folder">
-  	select *
-  	from folder
-  	where userid=#{userid,jdbcType=VARCHAR} and folderparent = #{parent,jdbcType=INTEGER} and foldername = #{foldername,jdbcType=VARCHAR};
-  </select>
-  <delete id="deleteFolder" parameterType="java.lang.Integer">
-  	DELETE FROM `sharefile`.`folder` WHERE `idfolder`=#{folderid,jdbcType=INTEGER};  	
-  </delete>
-  <select id="getFolderById" parameterType="java.lang.Integer" resultType="com.linkyuji.pojo.Folder">
-  	select *
-  	from `sharefile`.`folder`
-  	where `idfolder`=#{id,jdbcType=INTEGER};
-  </select>
+<mapper namespace="com.linkyuji.IDao.FolderMapper">
+	<insert id="addFolder" parameterType="com.linkyuji.pojo.Folder">
+		INSERT INTO `sharefile`.`folder` (`userid`, `foldername`, `folderparent`)
+		VALUES (#{userid}, #{foldername}, #{folderparent});
+	</insert>
+
+	<select id="loadFolderByIdP" parameterType="java.util.Map"
+		resultType="com.linkyuji.pojo.Folder">
+		select *
+		from folder
+		where userid = #{userid,jdbcType=VARCHAR} and folderparent =
+		#{folderparent,jdbcType = INTEGER};
+	</select>
+	<select id="findFolder" parameterType="java.util.Map"
+		resultType="com.linkyuji.pojo.Folder">
+		select *
+		from folder
+		where userid=#{userid,jdbcType=VARCHAR} and folderparent =
+		#{parent,jdbcType=INTEGER} and foldername =
+		#{foldername,jdbcType=VARCHAR};
+	</select>
+	<delete id="deleteFolder" parameterType="java.lang.Integer">
+		DELETE FROM `sharefile`.`folder` WHERE
+		`idfolder`=#{folderid,jdbcType=INTEGER};
+	</delete>
+	<select id="getFolderById" parameterType="java.lang.Integer"
+		resultType="com.linkyuji.pojo.Folder">
+		select *
+		from `sharefile`.`folder`
+		where `idfolder`=#{id,jdbcType=INTEGER};
+	</select>
+
+	<delete id="deleteFolderByUserid" parameterType="java.lang.String">
+		delete from
+		`sharefile`.`folder`
+		where `userid` = #{id,jdbcType=VARCHAR};
+	</delete>
 </mapper>

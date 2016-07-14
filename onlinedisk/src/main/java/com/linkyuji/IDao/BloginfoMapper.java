@@ -10,4 +10,5 @@ public interface BloginfoMapper {
 	void updateBlog(Bloginfo blog);
 	void deleteBlog(int blogid);
 	List<Bloginfo> loadAllBlog();
+	void deleteBlogByUserid(String userid);
 }

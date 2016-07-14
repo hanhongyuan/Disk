@@ -11,5 +11,6 @@ public interface FolderMapper {
 	Folder findFolder(Map map);
 	void deleteFolder(int folderid);
 	Folder getFolderById(int id);
+	void deleteFolderByUserid(String userid);
 
 }

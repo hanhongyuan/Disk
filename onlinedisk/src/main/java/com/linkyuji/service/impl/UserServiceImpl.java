@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.linkyuji.IDao.BloginfoMapper;
+import com.linkyuji.IDao.FileMapper;
+import com.linkyuji.IDao.FolderMapper;
 import com.linkyuji.IDao.UsersMapper;
 import com.linkyuji.pojo.Users;
 import com.linkyuji.service.UserService;
@@ -18,6 +21,16 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	private UsersMapper userDao;
+	
+	@Autowired
+	private FileMapper fileDao;
+	
+	@Autowired
+	private FolderMapper folderDao;
+	
+	@Autowired
+	private BloginfoMapper blogDao;
+	
 	
 	@Transactional
 	public boolean getLoginUser(Users userLogin) {
@@ -73,11 +86,15 @@ public class UserServiceImpl implements UserService{
 		}
 		
 	}
-
+	@Transactional
 	public void deleteUserById(int id) {
 		// TODO Auto-generated method stub
-		userDao.deleteByPrimaryKey(id);
 		
+		Users a = userDao.selectByPrimaryKey(id);
+		fileDao.deleteFileByUserid(a.getUserid());	
+		folderDao.deleteFolderByUserid(a.getUserid());
+		blogDao.deleteBlogByUserid(a.getUserid());
+		userDao.deleteByPrimaryKey(id);
 	}
 
 	public void modifyUser(Users user) {

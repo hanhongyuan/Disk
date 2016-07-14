@@ -44,6 +44,8 @@ public class BlogServiceImpl implements BlogService{
 		// TODO Auto-generated method stub
 		return blogDao.loadAllBlog();
 	}
+
+
 	
 
 }
