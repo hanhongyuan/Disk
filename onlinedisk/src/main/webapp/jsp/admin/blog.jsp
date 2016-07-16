@@ -65,6 +65,7 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
+			<li><a><%=a.getUserid() %></a></li>
 				<li><a href="<%=request.getContextPath()%>/jsp/exit.jsp">注销</a></li>
 			</ul>
 		</div>
